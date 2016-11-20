@@ -10,6 +10,8 @@ namespace Vidly.Controllers
 {
     public class CustomersController : Controller
     {
+        #region DB Context
+
         private ApplicationDbContext _context;
 
         public CustomersController()
@@ -23,6 +25,8 @@ namespace Vidly.Controllers
             _context.Dispose();    
         }
 
+        #endregion
+
         // GET: Customers
         public ActionResult Index()
         {
@@ -34,13 +38,19 @@ namespace Vidly.Controllers
         // Provides a details view of the customers
         public ActionResult Details(int id)
         {
-            var customer = _context.Customers.SingleOrDefault(c => c.Id == id);
+            var customer = _context.Customers.Include(c => c.MembershipType).SingleOrDefault(c => c.Id == id);
 
             if (customer == null)
                 return HttpNotFound();
 
             return View(customer);
         }
-        
+
+        // Add new movie action
+        public ActionResult New()
+        {
+            return View();
+        }
+
     }
 }

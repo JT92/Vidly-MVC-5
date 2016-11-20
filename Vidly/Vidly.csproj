@@ -231,9 +231,26 @@
     <Compile Include="Migrations\201611200447431_UpdateMembershipTypeNames.Designer.cs">
       <DependentUpon>201611200447431_UpdateMembershipTypeNames.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201611200501284_MakeMembershipTypeNameRequired.cs" />
+    <Compile Include="Migrations\201611200501284_MakeMembershipTypeNameRequired.Designer.cs">
+      <DependentUpon>201611200501284_MakeMembershipTypeNameRequired.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201611200512013_AddBirthdateToCustomer.cs" />
+    <Compile Include="Migrations\201611200512013_AddBirthdateToCustomer.Designer.cs">
+      <DependentUpon>201611200512013_AddBirthdateToCustomer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201611200530501_AddMovieFieldsAndGenre.cs" />
+    <Compile Include="Migrations\201611200530501_AddMovieFieldsAndGenre.Designer.cs">
+      <DependentUpon>201611200530501_AddMovieFieldsAndGenre.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201611200531540_PopulateGenres.cs" />
+    <Compile Include="Migrations\201611200531540_PopulateGenres.Designer.cs">
+      <DependentUpon>201611200531540_PopulateGenres.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Customer.cs" />
+    <Compile Include="Models\Genre.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\MembershipType.cs" />
@@ -305,6 +322,8 @@
     <Content Include="Views\Customers\Index.cshtml" />
     <Content Include="Views\Customers\Details.cshtml" />
     <Content Include="Views\Movies\Index.cshtml" />
+    <Content Include="Views\Movies\Details.cshtml" />
+    <Content Include="Views\Customers\New.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -338,6 +357,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201611200447431_UpdateMembershipTypeNames.resx">
       <DependentUpon>201611200447431_UpdateMembershipTypeNames.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611200501284_MakeMembershipTypeNameRequired.resx">
+      <DependentUpon>201611200501284_MakeMembershipTypeNameRequired.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611200512013_AddBirthdateToCustomer.resx">
+      <DependentUpon>201611200512013_AddBirthdateToCustomer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611200530501_AddMovieFieldsAndGenre.resx">
+      <DependentUpon>201611200530501_AddMovieFieldsAndGenre.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611200531540_PopulateGenres.resx">
+      <DependentUpon>201611200531540_PopulateGenres.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
