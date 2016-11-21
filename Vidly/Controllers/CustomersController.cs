@@ -79,6 +79,8 @@ namespace Vidly.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Save(Customer customer)
         {
+
+            // Return to Customer Form if there are validation errors
             if (!ModelState.IsValid)
             {
                 var viewModel = new CustomerFormViewModel
@@ -89,6 +91,7 @@ namespace Vidly.Controllers
                 return View("CustomerForm", viewModel);
             }
 
+            // If there are no errors add/edit the customer in db
             if (customer.Id == 0)
                 _context.Customers.Add(customer);
             else
