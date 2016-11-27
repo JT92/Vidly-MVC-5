@@ -10,11 +10,26 @@ namespace Vidly.App_Start
 {
     public class MappingProfile : Profile
     {
+        // DTO (Data Transfer Object) Mapping for API
         public MappingProfile()
         {
-            // Map Customers to Customer DTO (Data Transfer Object) for API
+
+            // CUSTOMERS 
             CreateMap<Customer, CustomerDto>();
-            CreateMap<CustomerDto, Customer>();
+            CreateMap<CustomerDto, Customer>().
+                ForMember(c => c.Id, opt => opt.Ignore());
+
+            // CUSTOMERS - MEMBERSHIP TYPE
+            CreateMap<MembershipType, MembershipTypeDto>();
+
+            // MOVIES 
+            CreateMap<Movie, MovieDto>();
+            CreateMap<MovieDto, Movie>().
+                ForMember(c => c.Id, opt => opt.Ignore());
+
+            // MOVIES - GENRE
+            CreateMap<Genre, GenreDto>();
+
         }
     }
 }
