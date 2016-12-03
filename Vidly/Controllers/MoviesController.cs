@@ -60,6 +60,7 @@ namespace Vidly.Controllers
         }
 
         // Edit existing movie - MovieForm
+        [Authorize(Roles = RoleName.CanManageMovies)]
         public ActionResult Edit(int id)
         {
             var movie = _context.Movies.SingleOrDefault(c => c.Id == id);
@@ -80,6 +81,7 @@ namespace Vidly.Controllers
         // Save changes to edit/new - MovieForm
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = RoleName.CanManageMovies)]
         public ActionResult Save(Movie movie)
         {
             if (!ModelState.IsValid)
