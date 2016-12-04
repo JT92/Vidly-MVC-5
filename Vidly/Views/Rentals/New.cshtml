@@ -17,7 +17,7 @@
     <div class="form-group">
         <label>Movie</label>
         <div class="tt-container">
-            <input type="text" name="movie" data-rule-atLeastOneMovie="true"  value="" class="movie form-control" />
+            <input type="text" name="movie" data-rule-atLeastOneMovie="true"  value="" id="movie" class="form-control" />
         </div>
 
     </div>
@@ -72,7 +72,7 @@
                     wildcard: '%QUERY'
                 }
             });
-            $('.movie').typeahead({
+            $('#movie').typeahead({
                 minLength: 3,
                 highlight: true
             }, {
@@ -81,24 +81,35 @@
                 source: movies
             }).on("typeahead:select", function (e, movie) {
                 $("#movies").append("<li class='list-group-item'>" + movie.name + "</li>");
-                $(".movie").typeahead("val", "");
+                $("#movie").typeahead("val", "");
                 vm.movieIds.push(movie.id);
             });
-
-            @* Customer Validator *@
-            $.validator.addMethod("validCustomer", function () {
-                return vm.customerId && vm.customerId !== 0;
-            }, "Please select a valid customer.");
 
             @* Movies Validator *@
             $.validator.addMethod("atLeastOneMovie", function () {
                 return vm.movieIds && vm.movieIds.length > 0;
             }, "Please select at least one movie.");
 
+            @* Customer Validator *@
+            $.validator.addMethod("validCustomer", function () {
+                return vm.customerId && vm.customerId !== 0;
+            }, "Please select a valid customer.");
+
             @* Form Submit *@
             var validator = $("#newRental").validate({
+
+                // make sure error message isn't displayed
+                errorPlacement: function (error, element) {
+                    if (element.attr("id") != null) {
+                        error.insertAfter(element);
+                    }
+                },
+
+
+
+
                 submitHandler: function () {
-                    
+
                     $.ajax({
                         url: "/api/newRentals",
                         method: "post",
@@ -108,7 +119,7 @@
                         toastr.success("Rentals Successfully recorded.");
 
                         $("#customer").typeahead("val", "");
-                        $(".movie").typeahead("val", "");
+                        $("#movie").typeahead("val", "");
                         $("#movies").empty();
 
                         vm = { movieIds: [] };
