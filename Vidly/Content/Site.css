@@ -34,3 +34,14 @@ label.error {
 input.error {
     border: 2px solid red;
 }
+
+
+
+/* Typeahead */
+.twitter-typeahead {
+    width: 300px;
+}
+
+.tt-suggestion {
+    font-size: 15px;
+}
