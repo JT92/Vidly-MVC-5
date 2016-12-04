@@ -96,7 +96,7 @@
             }, "Please select at least one movie.");
 
             @* Form Submit *@
-            $("#newRental").validate({
+            var validator = $("#newRental").validate({
                 submitHandler: function () {
                     
                     $.ajax({
@@ -106,6 +106,15 @@
                     })
                     .done(function () {
                         toastr.success("Rentals Successfully recorded.");
+
+                        $("#customer").typeahead("val", "");
+                        $(".movie").typeahead("val", "");
+                        $("#movies").empty();
+
+                        vm = { movieIds: [] };
+
+                        validator.resetForm();
+
                     })
                     .fail(function () {
                         toastr.error("Something unexpected happened.");
