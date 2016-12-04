@@ -24,13 +24,22 @@ namespace Vidly.Controllers.Api
         #endregion
         
         // GET /api/movies
-        public IHttpActionResult GetMovies()
+        public IHttpActionResult GetMovies(string query = null)
         {
-            // eager load moviesDto + Genre (uses Entity)
-            var moviesDto = _context.Movies
-                .Include(c => c.Genre)
+
+
+            // eager load "moviesDto + Genre" (uses Entity)
+            var moviesQuery = _context.Movies
+                .Include(m => m.Genre)
+                .Where(m => m.NumberAvailable > 0);
+
+            if (!String.IsNullOrWhiteSpace(query))
+                moviesQuery = moviesQuery.Where(m => m.Name.Contains(query));
+
+            var moviesDto = moviesQuery
                 .ToList()
                 .Select(Mapper.Map<Movie,MovieDto>);
+
             return Ok(moviesDto);
         }
 
@@ -38,7 +47,7 @@ namespace Vidly.Controllers.Api
         public IHttpActionResult GetMovie(int id)
         {
             // Get the movie or return error
-            var movie = _context.Movies.SingleOrDefault(c => c.Id == id);
+            var movie = _context.Movies.SingleOrDefault(m => m.Id == id);
             if (movie == null)
                 return NotFound();
 
@@ -76,7 +85,7 @@ namespace Vidly.Controllers.Api
                 return BadRequest();
 
             // get movie from db
-            var movieInDb = _context.Movies.SingleOrDefault(c => c.Id == id);
+            var movieInDb = _context.Movies.SingleOrDefault(m => m.Id == id);
             if (movieInDb == null)
                 return NotFound();
 
@@ -99,7 +108,7 @@ namespace Vidly.Controllers.Api
                 throw new HttpResponseException(HttpStatusCode.BadRequest);
             
             // find movie
-            var movieInDb = _context.Movies.SingleOrDefault(c => c.Id == id);
+            var movieInDb = _context.Movies.SingleOrDefault(m => m.Id == id);
             if (movieInDb == null)
                 throw new HttpResponseException(HttpStatusCode.NotFound);
 
