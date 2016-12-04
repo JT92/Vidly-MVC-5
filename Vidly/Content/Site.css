@@ -41,7 +41,14 @@ input.error {
 .twitter-typeahead {
     width: 300px;
 }
-
 .tt-suggestion {
     font-size: 15px;
+}
+
+
+/* Home Page */
+.jumbotron-custom{
+    background-color: #102738;
+    color: white;
+    margin-left: -1px;
 }
